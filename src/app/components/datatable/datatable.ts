@@ -484,7 +484,7 @@ export class DataTable implements AfterViewChecked,AfterViewInit,AfterContentIni
 
     @Input() pageLinks: number = 5;
 
-    @Input() rowsPerPageOptions: number[];
+    @Input() rowsPerPageOptions: any;
 
     @Input() responsive: boolean;
     

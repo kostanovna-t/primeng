@@ -27,7 +27,7 @@ import {CommonModule} from '@angular/common';
                 <span class="fa fa-step-forward"></span>
             </a>
             <select class="ui-paginator-rpp-options ui-widget ui-state-default" *ngIf="rowsPerPageOptions" (change)="onRppChange($event)">
-                <option *ngFor="let opt of rowsPerPageOptions" [value]="opt" [selected]="rows == opt">{{opt}}</option>
+                <option *ngFor="let opt of rowsPerPageOptions" [value]="opt.key" [selected]="rows == opt.key">{{opt.value}}</option>
             </select>
         </div>
     `
@@ -41,8 +41,8 @@ export class Paginator {
     @Input() style: any;
 
     @Input() styleClass: string;
-    
-    @Input() rowsPerPageOptions: number[];
+
+    @Input() rowsPerPageOptions: any;
     
     @Input() alwaysShow: boolean = true;
 
@@ -161,7 +161,7 @@ export class Paginator {
     }
     
     onRppChange(event) {
-        this.rows = this.rowsPerPageOptions[event.target.selectedIndex];
+        this.rows = this.rowsPerPageOptions[event.target.selectedIndex].key;
         this.changePageToFirst(event);
     }
 }
