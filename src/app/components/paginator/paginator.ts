@@ -26,6 +26,9 @@ import {CommonModule} from '@angular/common';
                     (click)="changePageToLast($event)" [ngClass]="{'ui-state-disabled':isLastPage()}" [tabindex]="isLastPage() ? -1 : null">
                 <span class="fa fa-step-forward"></span>
             </a>
+            <div *ngIf="entityPerPage">
+                {{entityPerPage}} {{currentEntityInterval()}} of {{_totalRecords}}
+            </div>
             <select class="ui-paginator-rpp-options ui-widget ui-state-default" *ngIf="rowsPerPageOptions" (change)="onRppChange($event)">
                 <option *ngFor="let opt of rowsPerPageOptions" [value]="opt.key" [selected]="rows == opt.key">{{opt.value}}</option>
             </select>
@@ -43,6 +46,8 @@ export class Paginator {
     @Input() styleClass: string;
 
     @Input() rowsPerPageOptions: any;
+
+    @Input() entityPerPage: string;
     
     @Input() alwaysShow: boolean = true;
 
@@ -163,6 +168,20 @@ export class Paginator {
     onRppChange(event) {
         this.rows = this.rowsPerPageOptions[event.target.selectedIndex].key;
         this.changePageToFirst(event);
+    }
+
+    currentEntityInterval(){
+        let str,
+            currentPage= this.getPage();
+        if(this.isFirstPage()){
+            return  1+ ' '+this.rows;
+        }
+        if(this.isLastPage()){
+            return  (currentPage*this.rows+1)+ ' '+this._totalRecords;
+        }
+
+        return (currentPage*this.rows+1)+ ' '+(currentPage*this.rows+this.rows);
+
     }
 }
 
