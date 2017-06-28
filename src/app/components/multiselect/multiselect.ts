@@ -58,6 +58,7 @@ export const MULTISELECT_VALUE_ACCESSOR: any = {
                             </div>
                             <label>{{option.label}}</label>
                         </li>
+                        <li  *ngIf="showClear" (click)="clear()">Clear</li>
                     </ul>
                 </div>
             </div>
@@ -68,6 +69,8 @@ export const MULTISELECT_VALUE_ACCESSOR: any = {
 export class MultiSelect implements OnInit,AfterViewInit,AfterViewChecked,DoCheck,OnDestroy,ControlValueAccessor {
 
     @Input() options: SelectItem[];
+
+    @Input() showClear: boolean = false;
 
     @Output() onChange: EventEmitter<any> = new EventEmitter();
 
@@ -282,7 +285,13 @@ export class MultiSelect implements OnInit,AfterViewInit,AfterViewChecked,DoChec
         event.preventDefault();
         event.stopPropagation();
     }
-         
+
+    clear(){
+        this.value = [];
+        this.onModelChange(this.value);
+        this.hide();
+    }
+
     onMouseclick(event,input) {
         if(this.disabled) {
             return;
