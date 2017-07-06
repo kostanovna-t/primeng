@@ -1012,7 +1012,7 @@ export class DataTable implements AfterViewChecked,AfterViewInit,AfterContentIni
                     this.multiSortMeta = [];
                 }
 
-                this.addSortMeta({field: this.sortField, order: this.sortOrder});
+                this.addSortMeta({field: this.sortField, order: this.sortOrder, event:event});
             }
 
             if(this.lazy) {
@@ -1022,26 +1022,28 @@ export class DataTable implements AfterViewChecked,AfterViewInit,AfterContentIni
             else {
                 if(this.sortMode == 'multiple')
                     this.sortMultiple();
-                else 
-                    this.sortSingle();
+                else
+                    this.sortSingle(event);
             }
             
             this.onSort.emit({
                 field: this.sortField,
                 order: this.sortOrder,
-                multisortmeta: this.multiSortMeta
+                multisortmeta: this.multiSortMeta,
+                event: event
             });
         }
         
         this.updateDataToRender(this.filteredValue||this.value);
     }
 
-    sortSingle() {
+    sortSingle(event?){
         if(this.value) {
             if(this.sortColumn && this.sortColumn.sortable === 'custom') {
                 this.sortColumn.sortFunction.emit({
                     field: this.sortField,
-                    order: this.sortOrder
+                    order: this.sortOrder,
+                    event: event ? event: null
                 });
             }
             else {
@@ -1178,11 +1180,11 @@ export class DataTable implements AfterViewChecked,AfterViewInit,AfterContentIni
             if((targetNode == 'TD' || (targetNode == 'SPAN' && !this.domHandler.hasClass(event.target, 'ui-c')))) {
                 if(this.sortField != this.groupField) {
                     this.sortField = this.groupField;
-                    this.sortSingle();
+                    this.sortSingle(event);
                 }
                 else {
                     this.sortOrder = -1 * this.sortOrder;
-                    this.sortSingle();
+                    this.sortSingle(event);
                 }
             }
         }
