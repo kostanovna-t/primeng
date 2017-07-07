@@ -26,10 +26,10 @@ import {CommonModule} from '@angular/common';
                     (click)="changePageToLast($event)" [ngClass]="{'ui-state-disabled':isLastPage()}" [tabindex]="isLastPage() ? -1 : null">
                 <span class="fa fa-step-forward"></span>
             </a>
-            <div *ngIf="entityPerPage">
+            <div *ngIf="entityPerPage" class="entities-per-page">
                 {{entityPerPage}} - {{currentEntityInterval()}} of {{_totalRecords}}
             </div>
-            <div *ngIf="textNearPerPage">
+            <div *ngIf="textNearPerPage" class="ui-paginator-textper-page">
                 {{textNearPerPage}}
             </div>
             <select class="ui-paginator-rpp-options ui-widget ui-state-default" *ngIf="rowsPerPageOptions" (change)="onRppChange($event)">
