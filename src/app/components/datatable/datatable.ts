@@ -488,6 +488,8 @@ export class DataTable implements AfterViewChecked,AfterViewInit,AfterContentIni
 
     @Input() entityPerPage: string;
 
+    @Input() textNearPerPage: string;
+
     @Input() responsive: boolean;
     
     @Input() stacked: boolean;
