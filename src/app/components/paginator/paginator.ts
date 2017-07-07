@@ -27,7 +27,10 @@ import {CommonModule} from '@angular/common';
                 <span class="fa fa-step-forward"></span>
             </a>
             <div *ngIf="entityPerPage">
-                {{entityPerPage}} {{currentEntityInterval()}} of {{_totalRecords}}
+                {{entityPerPage}} - {{currentEntityInterval()}} of {{_totalRecords}}
+            </div>
+            <div *ngIf="textNearPerPage">
+                {{textNearPerPage}}
             </div>
             <select class="ui-paginator-rpp-options ui-widget ui-state-default" *ngIf="rowsPerPageOptions" (change)="onRppChange($event)">
                 <option *ngFor="let opt of rowsPerPageOptions" [value]="opt.key" [selected]="rows == opt.key">{{opt.value}}</option>
@@ -48,7 +51,9 @@ export class Paginator {
     @Input() rowsPerPageOptions: any;
 
     @Input() entityPerPage: string;
-    
+
+    @Input() textNearPerPage: string;
+
     @Input() alwaysShow: boolean = true;
 
     public pageLinks: number[];

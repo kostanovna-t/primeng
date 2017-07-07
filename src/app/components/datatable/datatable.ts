@@ -461,7 +461,7 @@ export class ScrollableView implements AfterViewInit,AfterViewChecked,OnDestroy 
                 </div>
             </ng-template>
             
-            <p-paginator [rows]="rows" [first]="first"  [entityPerPage]="entityPerPage" [totalRecords]="totalRecords" [pageLinkSize]="pageLinks" styleClass="ui-paginator-bottom" [alwaysShow]="alwaysShowPaginator"
+            <p-paginator [rows]="rows" [first]="first" [textNearPerPage]="textNearPerPage"  [entityPerPage]="entityPerPage" [totalRecords]="totalRecords" [pageLinkSize]="pageLinks" styleClass="ui-paginator-bottom" [alwaysShow]="alwaysShowPaginator"
                 (onPageChange)="onPageChange($event)" [rowsPerPageOptions]="rowsPerPageOptions" *ngIf="paginator && paginatorPosition!='top' || paginatorPosition =='both'" styleClass="ui-paginator-bottom"></p-paginator>
             <div class="ui-datatable-footer ui-widget-header" *ngIf="footer">
                 <ng-content select="p-footer"></ng-content>
