@@ -27,7 +27,7 @@ import {CommonModule} from '@angular/common';
                 <span class="fa fa-step-forward"></span>
             </a>
             <div *ngIf="entityPerPage" class="entities-per-page">
-                {{entityPerPage}} - {{currentEntityInterval()}} of {{_totalRecords}}
+                {{entityPerPage}} {{currentEntityInterval()}} of {{_totalRecords}}
             </div>
             <div *ngIf="textNearPerPage" class="ui-paginator-textper-page">
                 {{textNearPerPage}}
@@ -179,13 +179,13 @@ export class Paginator {
         let str,
             currentPage= this.getPage();
         if(this.isFirstPage()){
-            return  this._totalRecords > this.rows ? 1+ ' '+this.rows : 1+ ' '+this._totalRecords;
+            return  this._totalRecords > this.rows ? 1+ ' - '+this.rows : 1+ ' '+this._totalRecords;
         }
         if(this.isLastPage()){
-            return  (currentPage*this.rows+1)+ ' '+this._totalRecords;
+            return  (currentPage*this.rows+1)+ ' - '+this._totalRecords;
         }
 
-        return currentPage*this.rows+this.rows < this._totalRecords ? (currentPage*this.rows+1)+ ' '+(currentPage*this.rows+this.rows) : (currentPage*this.rows+1)+ ' '+this._totalRecords;
+        return currentPage*this.rows+this.rows < this._totalRecords ? (currentPage*this.rows+1)+ ' - '+(currentPage*this.rows+this.rows) : (currentPage*this.rows+1)+ ' - '+this._totalRecords;
 
     }
 }
