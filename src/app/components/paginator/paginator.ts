@@ -179,13 +179,13 @@ export class Paginator {
         let str,
             currentPage= this.getPage();
         if(this.isFirstPage()){
-            return  1+ ' '+this.rows;
+            return  this._totalRecords > this.rows ? 1+ ' '+this.rows : 1+ ' '+this._totalRecords;
         }
         if(this.isLastPage()){
             return  (currentPage*this.rows+1)+ ' '+this._totalRecords;
         }
 
-        return (currentPage*this.rows+1)+ ' '+(currentPage*this.rows+this.rows);
+        return currentPage*this.rows+this.rows < this._totalRecords ? (currentPage*this.rows+1)+ ' '+(currentPage*this.rows+this.rows) : (currentPage*this.rows+1)+ ' '+this._totalRecords;
 
     }
 }
